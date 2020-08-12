@@ -12,21 +12,23 @@ This is the first challenge in your Advanced Programming Class.
 Build Requirements
 ------------------
 ```
-# Build Requirements here
+# Python 3.6
 ```
 
 
 How to build
 ------------
 ```
-# instructions here
+# Building not needed
 ```
 
 
 How to Run
 ----------
 ```
-# instructions here
+Change the content of the nested_array list on top of the function to whatever you want and run this in the command line:
+
+python first_challenge.py
 ```
 
 
