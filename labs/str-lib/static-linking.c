@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
         }
     }
     else{
-        printf("There was an error with the arguments, please try again\n");
+        printf("There was an error with the arguments, please try again.\n");
     }
     return 0;
 }
