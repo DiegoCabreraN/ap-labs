@@ -23,6 +23,35 @@ General Instructions
 - Don't forget to handle errors properly.
 - Coding best practices implementation will be also considered.
 
+Build And Run Instructions
+--------------------------
+
+In order to run the program correctly do the following:
+
+1. Compile the helper file
+
+```cmd
+gcc -c logger.c -o logger.o
+```
+
+2. Compile the test file
+
+```cmd
+gcc -c testLogger.c -o testLogger.o
+```
+
+3. Link the files
+
+```cmd
+gcc logger.o testLogger.o -o main.o
+```
+
+4. Run the `main.o` file with a number
+
+```cmd
+./main.o <number>
+```
+
 Test Suite
 ----------
 Build and Test automation is already implemented with the following command. Below some general tips and comments.
