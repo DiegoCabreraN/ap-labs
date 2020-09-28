@@ -26,6 +26,33 @@ General instructions
 - Don't forget to handle errors properly.
 - Coding best practices implementation will be also considered.
 
+Steps to Build and Run code
+---------------------------
+
+1. Compile `logger.c` with
+
+```cmd
+  gcc -c logger.c -o logger.o
+```
+
+2. Compile `testLogger.c` with
+
+```cmd
+  gcc -c testLogger.c -o testLogger.o
+```
+
+3. Link the files with
+
+```cmd
+  gcc logger.o test.o -o main.o
+```
+
+4. Finally, run the code with the following command
+
+```cmd
+  ./main.o
+```
+
 How to submit your work
 =======================
 ```
