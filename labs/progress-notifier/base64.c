@@ -116,12 +116,15 @@ int fileProcessor(char *filename, int processID){
     errorf("Something happened while reading the file");
     exit(1);
   }
-  if (write(outputFd, outputBuffer, outputSize) != outputSize)
+  if (write(outputFd, outputBuffer, outputSize) < 0)
     panicf("Write() returned error or partial write ocurred");
   
-  
-  if (close(outputFd) == -1){
+  if (close(inputFd) == -1){
     errorf("Closing input unsuccessful");
+    exit(1);
+  }
+  if (close(outputFd) == -1){
+    errorf("Closing output unsuccessful");
     exit(1);
   }
   exit(0);
