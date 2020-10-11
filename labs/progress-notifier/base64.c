@@ -9,8 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <math.h>
-//#include "logger.h"
-#include "CLog.h"
+#include "logger.h"
 
 #define WHITESPACE 64
 #define EQUALS 65
