@@ -7,30 +7,43 @@
 package main
 
 import (
+	"flag"
 	"io"
 	"log"
 	"net"
 	"os"
 )
 
-//!+
 func main() {
-	conn, err := net.Dial("tcp", "localhost:8000")
+	var server string
+	var username string
+
+	flag.StringVar(&server, "server", "localhost:8000", "<host>:<port>")
+	flag.StringVar(&username, "user", "", "user to login")
+	flag.Parse()
+
+	if username == "" {
+		log.Fatal("You need a username in order to login")
+	}
+
+	conn, err := net.Dial("tcp", server)
 	if err != nil {
 		log.Fatal(err)
 	}
 	done := make(chan struct{})
 	go func() {
+		io.WriteString(conn, username+"\n")
+
 		io.Copy(os.Stdout, conn) // NOTE: ignoring errors
-		log.Println("done")
-		done <- struct{}{} // signal the main goroutine
+		log.Println("Connection Closed")
+		os.Exit(1)
+		done <- struct{}{}
 	}()
 	mustCopy(conn, os.Stdin)
 	conn.Close()
-	<-done // wait for background goroutine to finish
+	os.Exit(1)
+	<-done
 }
-
-//!-
 
 func mustCopy(dst io.Writer, src io.Reader) {
 	if _, err := io.Copy(dst, src); err != nil {
