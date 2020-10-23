@@ -27,6 +27,7 @@ import (
 var tokens = make(chan struct{}, 20)
 
 func crawl(lastPage Page) []Page {
+	fmt.Printf("Page: %s Depth: %d\n", lastPage.link, lastPage.depth)
 	tokens <- struct{}{} // acquire a token
 	list, err := links.Extract(lastPage.link)
 	<-tokens // release the token
@@ -73,9 +74,11 @@ func listen(pagelist chan Page, maxDepth *int, file *string) {
 					pagelist <- page
 				}
 			}(page)
+		} else {
+			f.Close()
+			break
 		}
 	}
-	f.Close()
 }
 
 //!-sema
