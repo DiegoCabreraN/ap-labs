@@ -3,7 +3,7 @@
 APP_NAME =multiplier
 LIB_NAME =logger
 CC      = gcc
-CFLAGS  = -Wall
+CFLAGS  = -Wall -pthread
 
 
 data_files:
@@ -17,15 +17,15 @@ build:
 
 test: build data_files
 	 @echo Test 1
-	./${APP_NAME} -n 5 -out result_test1.txt
+	./${APP_NAME} -n 100 -out result_test1.txt
 	@echo Test 2
-	./${APP_NAME} -n 10 -out result_test2.txt
+	./${APP_NAME} -n 200 -out result_test2.txt
 	@echo Test 3
-	./${APP_NAME} -n 50 -out result_test3.txt
+	./${APP_NAME} -n 400 -out result_test3.txt
 	@echo Test 4
-	./${APP_NAME} -n 100 -out result_test4.txt
+	./${APP_NAME} -n 500 -out result_test4.txt
 	@echo Test 5
-	./${APP_NAME} -out result_test4.txt -n 100
+	./${APP_NAME} -out result_test4.txt -n 500
 
 clean:
 	rm -rf *.o ${APP_NAME} *.dat
