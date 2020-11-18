@@ -41,7 +41,7 @@ void initBoard(){
     for(int i = 0; i<31; i++)
         for(int j = 0; j<12; j++)
             board[i][j] = 0;
-    board[Xpos-1][0] = 2;
+    board[16][0] = 2;
     board[Xpos-1][11] = 1;
 }
 
@@ -153,12 +153,28 @@ void *playerMonitor(void *args){
         system("stty -icanon");
         char letter = getchar();
         if(letter == 'a' && Xpos>1){
+            if(board[Xpos-2][11] == 3){
+                if(lives > 1)
+                    lives--;
+                else{
+                    lives--;
+                    board[Xpos-1][11] = 0;
+                }
+            }
             //Free Place on board
             board[Xpos-1][11] = 0;
             Xpos--;
             //Ocupied by User
             board[Xpos-1][11] = 1;
         } else if(letter == 'd' && Xpos<31){
+            if(board[Xpos][11] == 3){
+                if(lives > 1)
+                    lives--;
+                else{
+                    lives--;
+                    board[Xpos-1][11] = 0;
+                }
+            }
             //Free Place on board
             board[Xpos-1][11] = 0;
             Xpos++;
@@ -170,7 +186,7 @@ void *playerMonitor(void *args){
             pthread_create(&bullet, NULL, playerBulletThread, (void *)&pos);
         }else if(letter == 'c' && board[Xpos-1][1] != 3){
             pthread_t bullet;
-            int pos[2] = {Xpos - 1, 0};
+            int pos[2] = {16, 0};
             pthread_create(&bullet, NULL, enemyBulletThread, (void *)&pos);
         }
         system("stty cooked");
